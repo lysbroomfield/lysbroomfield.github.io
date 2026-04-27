@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lys</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: #0d0810;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 10%, rgba(180,80,160,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 80% 90%, rgba(100,60,180,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 60% 30%, rgba(220,100,120,0.10) 0%, transparent 50%),
+      #0d0810;
+    z-index: 0;
+  }
+
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--d) ease-in-out infinite alternate;
+    opacity: 0;
+  }
+
+  @keyframes twinkle {
+    0%   { opacity: 0;      transform: scale(0.6); }
+    100% { opacity: var(--o); transform: scale(1.1); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    padding: 48px 24px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .avatar-ring {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 2.5px;
+    background: linear-gradient(135deg, #c77dce, #7b4fa6, #e8a0c4, #7b4fa6);
+    margin-bottom: 20px;
+  }
+
+  .avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #1a1020;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: #e8c5e0;
+  }
+
+  .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    font-style: italic;
+    color: #f0daf0;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .tagline {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(200,160,210,0.65);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 44px;
+    animation: fadeUp 0.9s 0.15s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .link-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    background: rgba(255,255,255,0.07);
+    border-radius: inherit;
+  }
+
+  .link-btn:hover::before { opacity: 1; }
+  .link-btn:hover  { transform: translateY(-2px); }
+  .link-btn:active { transform: scale(0.98); }
+
+  .btn-ig {
+    background: rgba(180,90,160,0.12);
+    border: 1px solid rgba(200,120,190,0.35);
+    color: #e8c5e0;
+    box-shadow: 0 0 28px rgba(180,80,150,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+    animation-delay: 0.3s;
+  }
+  .btn-ig:hover { box-shadow: 0 0 40px rgba(200,100,180,0.25), inset 0 1px 0 rgba(255,255,255,0.06); }
+
+  .btn-tt {
+    background: rgba(100,70,180,0.10);
+    border: 1px solid rgba(140,100,210,0.32);
+    color: #d0c0f0;
+    box-shadow: 0 0 28px rgba(100,70,180,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+    animation-delay: 0.45s;
+  }
+  .btn-tt:hover { box-shadow: 0 0 40px rgba(120,90,220,0.25), inset 0 1px 0 rgba(255,255,255,0.06); }
+
+  .icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.85; }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(180,100,200,0.4), transparent);
+    margin: 32px auto 0;
+    animation: fadeUp 0.8s 0.7s ease both;
+  }
+
+  .footer {
+    margin-top: 20px;
+    font-size: 11px;
+    color: rgba(180,140,190,0.35);
+    letter-spacing: 0.12em;
+    animation: fadeUp 0.8s 0.8s ease both;
+  }
+
+  .moon {
+    position: fixed;
+    top: 40px;
+    right: 60px;
+    width: 54px;
+    height: 54px;
+    z-index: 0;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<svg class="moon" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M27 4C14.3 4 4 14.3 4 27s10.3 23 23 23c1.5 0 3-.15 4.4-.43C24.1 47.3 18 38.8 18 29c0-11.5 8.3-21 19.3-22.8A23 23 0 0027 4z" fill="#e8c5e0"/>
+</svg>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+  <div class="avatar-ring">
+    <div class="avatar-inner">L</div>
+  </div>
+
+  <h1 class="name">lys</h1>
+  <p class="tagline">✦ &nbsp; follow along &nbsp; ✦</p>
+
+  <div class="links">
+    <a class="link-btn btn-ig" href="https://instagram.com/lysbroomfield" target="_blank" rel="noopener">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5"/>
+        <circle cx="12" cy="12" r="5"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+      instagram
+    </a>
+
+    <a class="link-btn btn-tt" href="https://tiktok.com/@lysbroomfield" target="_blank" rel="noopener">
+      <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.92a8.18 8.18 0 004.78 1.53V7.01a4.85 4.85 0 01-1.01-.32z"/>
+      </svg>
+      tiktok
+    </a>
+  </div>
+
+  <div class="divider"></div>
+  <p class="footer">lysbroomfield</p>
+</div>
+
+<script>
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 0.8;
+    const delay = Math.random() * 6;
+    const dur = (Math.random() * 4 + 3).toFixed(1);
+    const op = (Math.random() * 0.5 + 0.15).toFixed(2);
+    s.style.cssText = `
+      width:${size}px;height:${size}px;
+      top:${Math.random()*100}%;left:${Math.random()*100}%;
+      --d:${dur}s;--o:${op};
+      animation-delay:${delay}s;
+    `;
+    starsEl.appendChild(s);
+  }
+</script>
+
+</body>
+</html>

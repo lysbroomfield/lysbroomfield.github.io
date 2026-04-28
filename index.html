@@ -31,12 +31,7 @@
     z-index: 0;
   }
 
-  .stars {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
   .star {
     position: absolute;
@@ -47,8 +42,19 @@
   }
 
   @keyframes twinkle {
-    0%   { opacity: 0;      transform: scale(0.6); }
+    0%   { opacity: 0;        transform: scale(0.6); }
     100% { opacity: var(--o); transform: scale(1.1); }
+  }
+
+  .moon {
+    position: fixed;
+    top: 40px;
+    right: 60px;
+    width: 54px;
+    height: 54px;
+    z-index: 0;
+    opacity: 0.18;
+    pointer-events: none;
   }
 
   .container {
@@ -56,7 +62,7 @@
     z-index: 1;
     width: 100%;
     max-width: 420px;
-    padding: 48px 24px 64px;
+    padding: 48px 24px 72px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,15 +102,55 @@
     animation: fadeUp 0.9s ease both;
   }
 
-  .tagline {
+  .handle {
     font-size: 12px;
     font-weight: 300;
-    color: rgba(200,160,210,0.65);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 44px;
+    color: rgba(200,160,210,0.55);
+    letter-spacing: 0.14em;
+    margin-bottom: 10px;
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+
+  .bio {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(220,185,225,0.7);
+    letter-spacing: 0.03em;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    max-width: 300px;
     animation: fadeUp 0.9s 0.15s ease both;
   }
+
+  .socials {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,120,190,0.3);
+    background: rgba(180,90,160,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e8c5e0;
+    text-decoration: none;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .social-icon:hover {
+    transform: translateY(-2px);
+    border-color: rgba(200,120,190,0.6);
+    box-shadow: 0 0 16px rgba(200,100,180,0.2);
+  }
+
+  .social-icon svg { width: 16px; height: 16px; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
@@ -115,21 +161,16 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
 
   .link-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
     width: 100%;
-    padding: 16px 24px;
-    border-radius: 100px;
+    padding: 14px 20px;
+    border-radius: 16px;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.08em;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -143,7 +184,7 @@
     inset: 0;
     opacity: 0;
     transition: opacity 0.25s ease;
-    background: rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.05);
     border-radius: inherit;
   }
 
@@ -151,51 +192,92 @@
   .link-btn:hover  { transform: translateY(-2px); }
   .link-btn:active { transform: scale(0.98); }
 
-  .btn-ig {
-    background: rgba(180,90,160,0.12);
-    border: 1px solid rgba(200,120,190,0.35);
-    color: #e8c5e0;
-    box-shadow: 0 0 28px rgba(180,80,150,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
-    animation-delay: 0.3s;
+  .link-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 17px;
   }
-  .btn-ig:hover { box-shadow: 0 0 40px rgba(200,100,180,0.25), inset 0 1px 0 rgba(255,255,255,0.06); }
 
-  .btn-tt {
-    background: rgba(100,70,180,0.10);
-    border: 1px solid rgba(140,100,210,0.32);
-    color: #d0c0f0;
-    box-shadow: 0 0 28px rgba(100,70,180,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
-    animation-delay: 0.45s;
+  /* Text block fills remaining space and centers within it */
+  .link-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    text-align: center;
+    /* offset by icon width so text centers relative to full button, not just remaining space */
+    margin-right: 36px;
   }
-  .btn-tt:hover { box-shadow: 0 0 40px rgba(120,90,220,0.25), inset 0 1px 0 rgba(255,255,255,0.06); }
 
-  .icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.85; }
+  .link-title {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+
+  .link-sub {
+    font-size: 11px;
+    font-weight: 300;
+    opacity: 0.55;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-pink {
+    background: rgba(180,80,140,0.13);
+    border: 1px solid rgba(210,110,175,0.3);
+    color: #f0c8e8;
+    box-shadow: 0 0 20px rgba(180,80,150,0.1);
+  }
+  .btn-pink .link-icon { background: rgba(210,110,175,0.15); }
+  .btn-pink:hover { box-shadow: 0 0 32px rgba(200,100,170,0.2); }
+
+  .btn-purple {
+    background: rgba(110,70,180,0.12);
+    border: 1px solid rgba(150,100,220,0.28);
+    color: #d8c8f8;
+    box-shadow: 0 0 20px rgba(110,70,180,0.1);
+  }
+  .btn-purple .link-icon { background: rgba(150,100,220,0.15); }
+  .btn-purple:hover { box-shadow: 0 0 32px rgba(130,90,220,0.22); }
+
+  .btn-rose {
+    background: rgba(200,80,110,0.10);
+    border: 1px solid rgba(220,110,140,0.28);
+    color: #f8c8d8;
+    box-shadow: 0 0 20px rgba(200,80,110,0.08);
+  }
+  .btn-rose .link-icon { background: rgba(220,110,140,0.15); }
+  .btn-rose:hover { box-shadow: 0 0 32px rgba(220,100,130,0.2); }
+
+  .btn-mauve {
+    background: rgba(150,90,160,0.11);
+    border: 1px solid rgba(180,120,195,0.28);
+    color: #eacaf5;
+    box-shadow: 0 0 20px rgba(150,90,160,0.09);
+  }
+  .btn-mauve .link-icon { background: rgba(180,120,195,0.15); }
+  .btn-mauve:hover { box-shadow: 0 0 32px rgba(170,110,190,0.2); }
 
   .divider {
     width: 40px;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(180,100,200,0.4), transparent);
-    margin: 32px auto 0;
-    animation: fadeUp 0.8s 0.7s ease both;
+    margin: 36px auto 0;
+    animation: fadeUp 0.8s 0.9s ease both;
   }
 
   .footer {
-    margin-top: 20px;
+    margin-top: 18px;
     font-size: 11px;
-    color: rgba(180,140,190,0.35);
+    color: rgba(180,140,190,0.3);
     letter-spacing: 0.12em;
-    animation: fadeUp 0.8s 0.8s ease both;
-  }
-
-  .moon {
-    position: fixed;
-    top: 40px;
-    right: 60px;
-    width: 54px;
-    height: 54px;
-    z-index: 0;
-    opacity: 0.18;
-    pointer-events: none;
+    animation: fadeUp 0.8s 1s ease both;
   }
 </style>
 </head>
@@ -210,33 +292,77 @@
 <div class="stars" id="stars"></div>
 
 <div class="container">
+
   <div class="avatar-ring">
     <div class="avatar-inner">L</div>
   </div>
 
   <h1 class="name">lys</h1>
-  <p class="tagline">✦ &nbsp; follow along &nbsp; ✦</p>
+  <p class="handle">@lysbroomfield</p>
+  <p class="bio">Photographer &amp; Content Creator<br>based in San Diego, California</p>
 
-  <div class="links">
-    <a class="link-btn btn-ig" href="https://instagram.com/lysbroomfield" target="_blank" rel="noopener">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <div class="socials">
+    <a class="social-icon" href="https://instagram.com/lysbroomfield" target="_blank" rel="noopener" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5"/>
         <circle cx="12" cy="12" r="5"/>
         <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
       </svg>
-      instagram
     </a>
-
-    <a class="link-btn btn-tt" href="https://tiktok.com/@lysbroomfield" target="_blank" rel="noopener">
-      <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+    <a class="social-icon" href="https://tiktok.com/@lysbroomfield" target="_blank" rel="noopener" title="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
         <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.92a8.18 8.18 0 004.78 1.53V7.01a4.85 4.85 0 01-1.01-.32z"/>
       </svg>
-      tiktok
     </a>
+  </div>
+
+  <div class="links">
+
+    <a class="link-btn btn-pink" href="https://www.amazon.com/shop/lysbroomfield?ref_=cm_sw_r_apin_aipsfshop_Z9D0M0FYD1F6BZC7B2TA&language=en-US" target="_blank" rel="noopener" style="animation-delay:0.25s">
+      <div class="link-icon">🛍️</div>
+      <div class="link-text">
+        <span class="link-title">Amazon Storefront</span>
+        <span class="link-sub">shop my favorites</span>
+      </div>
+    </a>
+
+    <a class="link-btn btn-purple" href="https://www.fashionkush.com/lys-" target="_blank" rel="noopener" style="animation-delay:0.35s">
+      <div class="link-icon">🌿</div>
+      <div class="link-text">
+        <span class="link-title">Fashion Kush</span>
+        <span class="link-sub">use code LYS for 10% off</span>
+      </div>
+    </a>
+
+    <a class="link-btn btn-rose" href="https://evryjewels.com/?ref=LYSBROOMFIELD" target="_blank" rel="noopener" style="animation-delay:0.45s">
+      <div class="link-icon">💎</div>
+      <div class="link-text">
+        <span class="link-title">Evry Jewels</span>
+        <span class="link-sub">use code LYSBROOMFIELD for 15% off</span>
+      </div>
+    </a>
+
+    <a class="link-btn btn-mauve" href="https://sillygeorge.com/products/pop-on-lashes-style-bloom" target="_blank" rel="noopener" style="animation-delay:0.55s">
+      <div class="link-icon">✨</div>
+      <div class="link-text">
+        <span class="link-title">Silly George Pop-On Lashes</span>
+        <span class="link-sub">use code LYS15 for 15% off</span>
+      </div>
+    </a>
+
+    <a class="link-btn btn-pink" href="https://www.ulta.com/?AID=164999&CID=af_164999_1390754_&PID=1390754&SubID=cmmk2fved004aotcdow22tvf5&afsrc=1&irgwc=1&utm_campaign=Content&utm_content=core&utm_medium=affiliate&utm_source=1390754&clickId=SQ-0oawWixyZRTw2fuyFUR3FUkuyEWxfuQSeSA0" target="_blank" rel="noopener" style="animation-delay:0.65s">
+      <div class="link-icon">💄</div>
+      <div class="link-text">
+        <span class="link-title">Ulta Beauty</span>
+        <span class="link-sub">click here for 10% off</span>
+      </div>
+    </a>
+
   </div>
 
   <div class="divider"></div>
   <p class="footer">lysbroomfield</p>
+
 </div>
 
 <script>
@@ -248,14 +374,10 @@
     const delay = Math.random() * 6;
     const dur = (Math.random() * 4 + 3).toFixed(1);
     const op = (Math.random() * 0.5 + 0.15).toFixed(2);
-    s.style.cssText = `
-      width:${size}px;height:${size}px;
-      top:${Math.random()*100}%;left:${Math.random()*100}%;
-      --d:${dur}s;--o:${op};
-      animation-delay:${delay}s;
-    `;
+    s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${dur}s;--o:${op};animation-delay:${delay}s;`;
     starsEl.appendChild(s);
   }
 </script>
+
 </body>
 </html>

@@ -203,7 +203,6 @@
     font-size: 17px;
   }
 
-  /* Text block fills remaining space and centers within it */
   .link-text {
     flex: 1;
     display: flex;
@@ -211,7 +210,6 @@
     gap: 2px;
     align-items: center;
     text-align: center;
-    /* offset by icon width so text centers relative to full button, not just remaining space */
     margin-right: 36px;
   }
 
@@ -318,6 +316,7 @@
 
   <div class="links">
 
+    <!-- 1. Amazon — always first -->
     <a class="link-btn btn-pink" href="https://www.amazon.com/shop/lysbroomfield?ref_=cm_sw_r_apin_aipsfshop_Z9D0M0FYD1F6BZC7B2TA&language=en-US" target="_blank" rel="noopener" style="animation-delay:0.25s">
       <div class="link-icon">🛍️</div>
       <div class="link-text">
@@ -326,15 +325,8 @@
       </div>
     </a>
 
-    <a class="link-btn btn-purple" href="https://www.fashionkush.com/lys-" target="_blank" rel="noopener" style="animation-delay:0.35s">
-      <div class="link-icon">🌿</div>
-      <div class="link-text">
-        <span class="link-title">Fashion Kush</span>
-        <span class="link-sub">use code LYS for 10% off</span>
-      </div>
-    </a>
-
-    <a class="link-btn btn-rose" href="https://evryjewels.com/?ref=LYSBROOMFIELD" target="_blank" rel="noopener" style="animation-delay:0.45s">
+    <!-- 2. 15% off -->
+    <a class="link-btn btn-rose" href="https://evryjewels.com/?ref=LYSBROOMFIELD" target="_blank" rel="noopener" style="animation-delay:0.35s">
       <div class="link-icon">💎</div>
       <div class="link-text">
         <span class="link-title">Evry Jewels</span>
@@ -342,7 +334,8 @@
       </div>
     </a>
 
-    <a class="link-btn btn-mauve" href="https://sillygeorge.com/products/pop-on-lashes-style-bloom" target="_blank" rel="noopener" style="animation-delay:0.55s">
+    <!-- 3. 15% off -->
+    <a class="link-btn btn-mauve" href="https://sillygeorge.com/products/pop-on-lashes-style-bloom" target="_blank" rel="noopener" style="animation-delay:0.45s">
       <div class="link-icon">✨</div>
       <div class="link-text">
         <span class="link-title">Silly George Pop-On Lashes</span>
@@ -350,6 +343,16 @@
       </div>
     </a>
 
+    <!-- 4. 10% off -->
+    <a class="link-btn btn-purple" href="https://www.fashionkush.com/lys-" target="_blank" rel="noopener" style="animation-delay:0.55s">
+      <div class="link-icon">🌿</div>
+      <div class="link-text">
+        <span class="link-title">Fashion Kush</span>
+        <span class="link-sub">use code LYS for 10% off</span>
+      </div>
+    </a>
+
+    <!-- 5. 10% off -->
     <a class="link-btn btn-pink" href="https://www.ulta.com/?AID=164999&CID=af_164999_1390754_&PID=1390754&SubID=cmmk2fved004aotcdow22tvf5&afsrc=1&irgwc=1&utm_campaign=Content&utm_content=core&utm_medium=affiliate&utm_source=1390754&clickId=SQ-0oawWixyZRTw2fuyFUR3FUkuyEWxfuQSeSA0" target="_blank" rel="noopener" style="animation-delay:0.65s">
       <div class="link-icon">💄</div>
       <div class="link-text">
